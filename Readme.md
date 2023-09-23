@@ -3,6 +3,10 @@
 
 This is a chrome extension that allows you to query the llama-cpp-python models while in the browser. It uses a local server to handle the queries and display the results in a popup.
 
+## Showcase
+
+![showcase](./screenshots/animate-use.gif)
+
 ## Prerequisites
 
 llama-cpp-python must be installed and some models must be downloaded. See [llama-cpp-python](https://github.com/abetlen/llama-cpp-python) for more information.
