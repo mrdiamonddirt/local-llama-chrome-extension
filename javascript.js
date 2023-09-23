@@ -10,10 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const helpButton = document.getElementById('helpButton');
   const helpClose = document.getElementById('helpClose');
   const clearConvo = document.getElementById('ClearConvo');
+  const copyButton = document.getElementById('copyCode');
 //   const serverStart = document.getElementById('serverStart');
 
   var creatorContentOpen = false;
   var helpContentOpen = false;
+  var code_response = null;
 
   function saveQuestionAndResponse(question, response) {
     const savedData = JSON.parse(localStorage.getItem('savedCoversation')) || [];
@@ -37,6 +39,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Call this function to display saved data when the window is opened
   displaySavedData();
+
+  resultDiv.addEventListener('click', function (event) {
+    if (event.target.id === 'copyCode') {
+      console.log('copying code');
+      // Code to copy the text when the copy button is clicked
+      var div = event.target.parentNode;
+      console.log(div);
+      var code = div.innerText;
+      // replace the last word copy with nothing
+      code = code.slice(0, -4);
+      console.log(code);
+      navigator.clipboard.writeText(code);
+    }
+  });
 
   queryInput.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
@@ -118,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
     resultDiv.innerHTML += `<div class="user">You said: ${your_prompt}</div>`;
 
     resultDiv.innerHTML += `<div class="loading">"Llama is thinking..."</div>`;
+    resultDiv.scrollTop = resultDiv.scrollHeight;
 
     fetch('http://127.0.0.1:5000/query', {
       method: 'POST',
@@ -144,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (code_response) {
             // remove the first <br> if it exists
             data.response = data.response.replace(/```<br>/g, '```');
-            data.response = data.response.replace(/```(.*?)```/g, '<div class="code">$1</div>');
+            data.response = data.response.replace(/```(.*?)```/g, '<div class="code"><pre>$1</pre><div id="copyCode">copy</div></div>');
         }
         resultDiv.innerHTML += `<div class="bot">Response: ${data.response}</div>`;	
         // Scroll to the bottom of the div

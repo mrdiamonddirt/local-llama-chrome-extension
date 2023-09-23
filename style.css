@@ -58,6 +58,7 @@ h2 {
 }
 
 .bot {
+    position: relative;
     background-color: darkblue;
     border: 1px solid grey;
     border-radius: 5px;
@@ -75,6 +76,7 @@ h2 {
 }
 
 .code {
+  position: relative;
   background-color: #000000; /* Light gray background color */
   padding: 10px; /* Padding for code blocks */
   border: 1px solid #ccc; /* Border around code blocks */
@@ -83,6 +85,7 @@ h2 {
   font-size: 14px; /* Adjust font size as needed */
   color: #1eff00; /* Text color for code */
   /* Add any other styling you need */
+  word-wrap: wrap;
 }
 
 .loading {
@@ -139,6 +142,29 @@ h2 {
 .repo-link:hover {
     scale: 1.1;
     color:hsl(0, 100%, 50%)
+}
+
+pre {
+    padding: 0;
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+#copyCode {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    /* background-color: rgb(4, 249, 4); */
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: crosshair;
+    background-color: #000000;
+}
+
+#copyCode:hover {
+ scale: 1.1;
 }
 
 #submitButton {
