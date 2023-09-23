@@ -1,0 +1,305 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
+
+:root {
+height: 600px;
+width: 300px;
+border: 0;
+margin: 0;
+padding: 0;
+/* background-color: blue; */
+position: relative;
+overflow: hidden;
+font-family: "Poppins", sans-serif;
+color: white;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(4, 249, 4);
+    border-radius: 10px;
+}
+
+body {
+    height: 220px;
+    width: 500px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 100;
+    margin: 0px 0px 0px 5px;
+    padding: 0;
+}
+
+.user {
+    display: flex;
+    width: fit-content;
+    background-color: darkgreen;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    flex: 1;
+}
+
+.bot {
+    background-color: darkblue;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.error {
+    background-color: rgb(249, 4, 4);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    flex: 1;
+}
+
+.code {
+  background-color: #000000; /* Light gray background color */
+  padding: 10px; /* Padding for code blocks */
+  border: 1px solid #ccc; /* Border around code blocks */
+  border-radius: 4px; /* Rounded corners for code blocks */
+  font-family: monospace; /* Use a monospace font for code */
+  font-size: 14px; /* Adjust font size as needed */
+  color: #1eff00; /* Text color for code */
+  /* Add any other styling you need */
+}
+
+.loading {
+    background-color: rgb(70, 1, 182);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    flex: 1;
+    animation: hueshift 5s infinite;
+    width: fit-content;
+}
+
+@keyframes hueshift {
+    0% {
+        background-color: hsl(0, 100%, 50%); /* Red */
+        color: hsl(120, 100%, 50%);
+    }
+    14.29% {
+        background-color: hsl(30, 100%, 50%); /* Orange */
+        color: hsl(180, 100%, 50%);
+    }
+    28.57% {
+        background-color: hsl(60, 100%, 50%); /* Yellow */
+        color: hsl(240, 100%, 50%);
+    }
+    42.86% {
+        background-color: hsl(120, 100%, 50%); /* Green */
+        color: hsl(270, 100%, 50%);
+    }
+    57.14% {
+        background-color: hsl(180, 100%, 50%); /* Cyan */
+        color: hsl(300, 100%, 50%);
+    }
+    71.43% {
+        background-color: hsl(240, 100%, 50%); /* Blue */
+        color: hsl(0, 100%, 50%);
+    }
+    85.71% {
+        background-color: hsl(270, 100%, 50%); /* Indigo */
+        color: hsl(30, 100%, 50%);
+    }
+    100% {
+        background-color: hsl(300, 100%, 50%); /* Violet */
+        color: hsl(60, 100%, 50%);
+    }
+}
+
+.repo-link {
+    color: white;
+    text-decoration: none;
+}
+
+.repo-link:hover {
+    scale: 1.1;
+    color:hsl(0, 100%, 50%)
+}
+
+#submitButton {
+    background-color: rgb(4, 249, 4);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    color: Black;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+#ClearConvo {
+    position: absolute;
+    right: 0;
+    background-color: rgb(249, 114, 4);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    color: Black;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+#queryInput {
+    background-color: rgb(43, 43, 43);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    color: white;
+    font-size: 10px;
+    font-weight: 100;
+    outline: none;
+    width: 90%;
+    height: 20px;
+    resize: none;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-word-break: break-all;
+    -ms-word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    text-align: left;
+    line-height: 1.5;
+    font-family: "Poppins", sans-serif;
+    font-size: 10px;
+    font-weight: 100;
+}
+
+#serverCheck {
+    background-color: rgba(4, 241, 249, 0.795);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    color: black;
+    font-size: 12px;
+    font-weight: 100;
+    cursor: pointer;
+    outline: none;
+}
+
+
+#result {
+    background-color: rgb(43, 43, 43);
+    height: 80vh;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0px 5px 0px 5px;
+    overflow-y: scroll;
+    color: white;
+    font-size: 10px;
+    /* chrome scroll bar customisation */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#chat-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 300px;
+    background-color: rgb(53, 53, 53);
+    resize: both; /* Allow the window to be resized */
+}
+
+#creator-wrapper {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(53, 53, 53);
+    height: fit-content;
+    z-index: 1;
+    margin: 5px;
+    padding: 5px;
+    color: #1eff00;
+}
+
+
+#creator-content {
+    font-size: 10px;
+}
+
+#creatorClose {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#creatorButton {
+    background-color: yellow;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+#helpButton {
+    background-color: rgb(4, 249, 4);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 0px 5px 0px 5px;
+    padding: 5px;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+#help-wrapper {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(53, 53, 53);
+    height: fit-content;
+    z-index: 1;
+    margin: 5px;
+    padding: 5px;
+    color: #1eff00;
+}
+
+#helpClose {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Local Model Query</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="javascript.js"></script>
+</head>
+<body>
+    <div id="tab"></div>
+    <div id="chat-wrapper">
+        <div id="chat-content">
+            <button id="ClearConvo">Clear Chat</button>
+            <h2>Local Llama</h2>
+            <div id="result"></div>
+            <input type="text" id="queryInput" placeholder="Enter your query">
+            <button id="submitButton">Submit</button><button id="serverCheck">Check Server</button>
+        <button id="helpButton">Help</button><button id="creatorButton">Support</button>
+        </div>
+        <div id="help-wrapper">
+            <div id="help-content">
+                <button id="helpClose">X</button>
+                <h3>Help/Instructions</h3>
+                <p>Local Llama is a project that aims to make it easier to query local models. It is currently in development.</p>
+                <p>there is an acompaning script server.py which is a simple llama-cpp-python flask server</p>
+                <p>start the server in a terminal with python script.py</p>
+                <p>then you can query the server with the popup</p>
+                <p>you can click the check server button at the bottom to check if the server is up, green is up, Red is not</p>
+                <p>For more information, please visit the <a class="repo-link" href="http://github.com/mrdiamonddirt/">GitHub repository</a>.</p>
+            </div>
+        </div>
+        <div id="creator-wrapper">
+            <div id="creator-content">
+                <button id="creatorClose">X</button>
+                <h3>Creator: Rowan Wood</h3>
+                <p>Local Llama is a project that aims to make it easier to query local models. It is currently in development.</p>
+                <p>For more information, please visit the <a class="repo-link" href="http://github.com/mrdiamonddirt/">GitHub repository</a>.</p>
+            </div>
+        </div>
+        <!-- <button id="serverStart">Start Server</button> -->
+    </div>
+</body>
+</html>
