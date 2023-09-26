@@ -1,5 +1,4 @@
 import os
-import appdirs
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS

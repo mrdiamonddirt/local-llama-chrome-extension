@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const helpButton = document.getElementById('helpButton');
   const helpClose = document.getElementById('helpClose');
   const clearConvo = document.getElementById('ClearConvo');
-  const copyButton = document.getElementById('copyCode');
   const settingsButton = document.getElementById('settingMenuBtn');
   const settingsWindow = document.getElementById('settings-wrapper');
   const settingsClose = document.getElementById('settingsClose');
@@ -278,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Scroll to the bottom of the div
         resultDiv.scrollTop = resultDiv.scrollHeight;
         saveQuestionAndResponse(query, data.response);
-
+        queryInput.value = '';
       })
       .catch(error => {
         const loading = document.querySelector('.loading');
