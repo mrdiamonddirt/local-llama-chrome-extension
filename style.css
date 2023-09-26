@@ -171,7 +171,20 @@ pre {
     background-color: rgb(4, 249, 4);
     border: 1px solid grey;
     border-radius: 5px;
-    margin: 5px;
+    margin: 0px;
+    padding: 5px;
+    color: Black;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+#settingMenuBtn {
+    background-color: rgb(4, 249, 4);
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 0px;
     padding: 5px;
     color: Black;
     font-size: 12px;
@@ -264,6 +277,39 @@ pre {
     resize: both; /* Allow the window to be resized */
 }
 
+#settings-wrapper {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(53, 53, 53);
+    height: fit-content;
+    z-index: 1;
+    margin: 5px;
+    padding: 5px;
+}
+
+#controls-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: 5px;
+    padding: 5px;
+}
+
+#settingsClose {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#settings-content {
+    font-size: 12px;
+    width: 250px;
+    height: 400px;
+    color: white;
+}
+
 #creator-wrapper {
     display: none;
     position: absolute;
@@ -290,7 +336,6 @@ pre {
     background-color: yellow;
     border: 1px solid grey;
     border-radius: 5px;
-    margin: 5px;
     padding: 5px;
     color: black;
     font-size: 12px;

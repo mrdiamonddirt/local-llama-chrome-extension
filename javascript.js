@@ -11,11 +11,44 @@ document.addEventListener('DOMContentLoaded', function () {
   const helpClose = document.getElementById('helpClose');
   const clearConvo = document.getElementById('ClearConvo');
   const copyButton = document.getElementById('copyCode');
+  const settingsButton = document.getElementById('settingMenuBtn');
+  const settingsWindow = document.getElementById('settings-wrapper');
+  const settingsClose = document.getElementById('settingsClose');
+  const modelSelect = document.getElementById('modelSelect');
+  const changeModelButton = document.getElementById('changeModel');
 //   const serverStart = document.getElementById('serverStart');
 
   var creatorContentOpen = false;
   var helpContentOpen = false;
   var code_response = null;
+
+  // if the settings are open get the current model selected in modelSelect and send it to the server to be loaded
+    changeModelButton.addEventListener('click', function () {
+        var model = modelSelect.options[modelSelect.selectedIndex].value;
+        console.log(model);
+        fetch('http://127.0.0.1:5000/load_model', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ model: model }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Received data:", data);
+
+            // Check if data.current_model is defined
+            if (data.current_model) {
+                // change the current model
+                document.getElementById('modelLoaded').innerText = data.current_model;
+            } else {
+                console.log("No current_model data found.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
 
   function saveQuestionAndResponse(question, response) {
     const savedData = JSON.parse(localStorage.getItem('savedCoversation')) || [];
@@ -70,35 +103,113 @@ document.addEventListener('DOMContentLoaded', function () {
     resultDiv.innerHTML = '';
   });
 
-    creatorButton.addEventListener('click', function () {
-        if (creatorContentOpen) {
-            creatorContentOpen = false;
-            creatorWindow.style.display = 'none';
-        } else {
-            creatorContentOpen = true;
-            creatorWindow.style.display = 'block';
-        }
-    });
+  creatorButton.addEventListener('click', function () {
+      if (creatorContentOpen) {
+          creatorContentOpen = false;
+          creatorWindow.style.display = 'none';
+      } else {
+          creatorContentOpen = true;
+          creatorWindow.style.display = 'block';
+      }
+  });
 
-    creatorClose.addEventListener('click', function () {
-        creatorContentOpen = false;
-        creatorWindow.style.display = 'none';
-    });
+  creatorClose.addEventListener('click', function () {
+      creatorContentOpen = false;
+      creatorWindow.style.display = 'none';
+  });
 
-    helpButton.addEventListener('click', function () {
-        if (helpContentOpen) {
-            helpContentOpen = false;
-            helpWrapper.style.display = 'none';
-        } else {
-            helpContentOpen = true;
-            helpWrapper.style.display = 'block';
-        }
-    });
+  helpButton.addEventListener('click', function () {
+      if (helpContentOpen) {
+          helpContentOpen = false;
+          helpWrapper.style.display = 'none';
+      } else {
+          helpContentOpen = true;
+          helpWrapper.style.display = 'block';
+      }
+  });
 
-    helpClose.addEventListener('click', function () {
-        helpContentOpen = false;
-        helpWrapper.style.display = 'none';
-    });
+  helpClose.addEventListener('click', function () {
+      helpContentOpen = false;
+      helpWrapper.style.display = 'none';
+  });
+
+  settingsButton.addEventListener('click', function () {
+      if (settingsWindow.style.display === 'block') {
+          settingsWindow.style.display = 'none';
+      } else {
+          settingsWindow.style.display = 'block';
+          
+        get_current_model();
+
+        get_ggufs();
+    }
+});
+
+  function get_current_model() {
+     // get the current model from the server
+        fetch('http://127.0.0.1:5000/get_current_model', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Received data:", data);
+
+            // Check if data.current_model is defined
+            if (data.current_model) {
+                // set the current model
+                document.getElementById('modelLoaded').innerText = data.current_model;
+            } else {
+                console.log("No current_model data found.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+  }
+
+  function get_ggufs() {
+        // get models from the server
+        fetch('http://127.0.0.1:5000/get_gguf_files', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Received data:", data);
+
+            // Check if data.gguf_files is defined
+            if (data.gguf_files && data.gguf_files.length) {
+                // remove the current options
+                var select = document.getElementById('modelSelect');
+                var length = select.options.length;
+                for (i = length-1; i >= 0; i--) {
+                    select.options[i] = null;
+                }
+
+                // add the new options
+                for (var i = 0; i < data.gguf_files.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = data.gguf_files[i];
+                    opt.innerHTML = data.gguf_files[i];
+                    select.appendChild(opt);
+                }
+            } else {
+                console.log("No gguf_files data found.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+  }
+
+  settingsClose.addEventListener('click', function () {
+      settingsWindow.style.display = 'none';
+  });
 
 
   serverCheckButton.addEventListener('click', function () {

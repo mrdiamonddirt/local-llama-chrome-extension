@@ -1,5 +1,6 @@
 import os
 import appdirs
+import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -112,17 +113,103 @@ app = Flask(__name__)
 # Enable CORS
 CORS(app)
 
-# get all local models from app directories
-repo_id = "codellama-7b-instruct.Q3_K_S"
-user_data_dir = appdirs.user_data_dir("Open Interpreter")
-default_path = os.path.join(user_data_dir, "models")
-model_path = os.path.join(default_path, repo_id)
-# replace \ with \\ for windows and add the .gguf extension
-model_path = model_path.replace("\\", "\\\\")
-model_path += ".gguf"
+# File path to store the selected model information
+selected_model_path = os.path.join(os.path.expanduser(
+    "~"), ".Llama_extension", "selected_model.json")
+
+# Function to save the selected model information to a JSON file
+def save_selected_model(model_path):
+    try:
+        os.makedirs(os.path.dirname(selected_model_path), exist_ok=True)
+        with open(selected_model_path, "w") as file:
+            json.dump({"modelPath": model_path}, file)
+    except Exception as e:
+        print(f'Error while saving selected model information: {str(e)}')
+
+# Function to load the selected model information from the JSON file
+def load_selected_model():
+    try:
+        if os.path.exists(selected_model_path):
+            with open(selected_model_path, "r") as file:
+                data = json.load(file)
+                return data.get("modelPath", None)
+    except Exception as e:
+        print(f'Error while loading selected model information: {str(e)}')
+    return None
+
+
+# Check if a default model is already selected, otherwise prompt for selection
+if not load_selected_model():
+    # Prompt the user to select the default model and store it
+    default_model_path = input(
+        "Please enter the path to the default model: ").strip()
+    save_selected_model(default_model_path)
+
+# Use the selected default model path
+model_path = load_selected_model()
 
 bot = LLMChatBot(model_path=model_path)
 
+
+@app.route('/set_selected_folder', methods=['POST'])
+def set_selected_folder():
+    global selected_folder
+    try:
+        data = request.get_json()
+        selected_folder = data.get('selectedFolder', '')
+        print(f'Selected folder path: {selected_folder}')
+        return jsonify({'status': 'Folder path set successfully'})
+    except Exception as e:
+        print(f'Error: {str(e)}')
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/get_selected_folder', methods=['GET'])
+def get_selected_folder():
+    global selected_folder
+    try:
+        return jsonify({'selectedFolder': selected_folder})
+    except Exception as e:
+        print(f'Error: {str(e)}')
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/get_current_model', methods=['GET'])
+def get_current_model():
+    try:
+        return jsonify({'current_model': model_path})
+    except Exception as e:
+        print(f'Error: {str(e)}')
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/load_model', methods=['POST'])
+def load_model():
+    try:
+        data = request.get_json()
+        model_path_file = os.path.dirname(model_path)
+        print(f'Loading model: {model_path_file}')
+        print(f'Loading model: {data}')
+        model_path_new = os.path.join(model_path_file, data.get('model', ''))
+        bot = LLMChatBot(model_path=model_path_new)
+        return jsonify({'status': 'Model loaded successfully'})
+    except Exception as e:
+        print(f'Error: {str(e)}')
+        return jsonify({'error': str(e)}), 500
+
+# Route to get the list of .gguf files in the model directory
+@app.route('/get_gguf_files', methods=['GET'])
+def get_gguf_files():
+    try:
+        gguf_files = []
+        if model_path:
+            # remove the file name from the path
+            model_path_file = os.path.dirname(model_path)
+            for file in os.listdir(model_path_file):
+                if file.endswith(".gguf"):
+                    gguf_files.append(file)
+        return jsonify({'gguf_files': gguf_files})
+    except Exception as e:
+        print(f'Error: {str(e)}')
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/query', methods=['POST'])
 def handle_query():
@@ -148,5 +235,5 @@ def health_check():
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000)
     print("API endpoint available.")
+    app.run(host='127.0.0.1', port=5000)

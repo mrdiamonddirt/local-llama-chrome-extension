@@ -13,16 +13,34 @@
             <h2>Local Llama</h2>
             <div id="result"></div>
             <input type="text" id="queryInput" placeholder="Enter your query">
-            <button id="submitButton">Submit</button><button id="serverCheck">Check Server</button>
+            <div id="controls-wrapper">
+            <button id="submitButton">Submit</button>
+            <button id="settingMenuBtn">Settings</button>
+            <!-- <button id="serverCheck">Check Server</button> -->
         <button id="helpButton">Help</button><button id="creatorButton">Support</button>
+        </div>
+        </div>
+        <div id="settings-wrapper">
+            <div id="settings-content">
+                <button id="settingsClose">X</button>
+                <h3>Settings</h3>
+                <p>Model Loaded: </p>
+                <p id="modelLoaded"></p>
+                <p>Check the Server is Live: <button id="serverCheck">Check Server</button></p>
+                <p>Select Model 
+                    <select id="modelSelect">
+                    </select>
+                </p>
+                <button id="changeModel">Change Model</button>
+            </div>
         </div>
         <div id="help-wrapper">
             <div id="help-content">
                 <button id="helpClose">X</button>
                 <h3>Help/Instructions</h3>
-                <p>Local Llama is a project that aims to make it easier to query local models. It is currently in development.</p>
-                <p>there is an acompaning script server.py which is a simple llama-cpp-python flask server</p>
-                <p>start the server in a terminal with python script.py</p>
+                <p>There is an acompaning script server.py which is a simple llama-cpp-python flask server</p>
+                <p>start the server in a terminal with `python script.py`</p>
+                <p>then select the default model you want to use, if the folder you have selected includes more models you will be able to change them from within the settings</p>
                 <p>then you can query the server with the popup</p>
                 <p>you can click the check server button at the bottom to check if the server is up, green is up, Red is not</p>
                 <p>For more information, please visit the <a class="repo-link" href="http://github.com/mrdiamonddirt/">GitHub repository</a>.</p>

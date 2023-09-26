@@ -36,10 +36,8 @@ obviously the bigger the model the slower the query. and the more ram it will us
 - [x] add a popup to display the results
 - [x] store and retrieve conversations
 - [x] clear saved conversations
-- [ ] add a settings page
+- [x] add a settings page
+- [x] add a way to change the model easily
 - [ ] add a way to change the server address
-- [ ] add a way to change the model easily
 - [ ] add a way to download models from huggingface
 - [ ] add a way to start the server from the extension
-
-## 

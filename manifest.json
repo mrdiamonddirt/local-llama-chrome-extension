@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Local Model Query Extension",
-  "version": "1.0",
+  "name": "Local LLama LLM AI Chat Query Tool",
+  "version": "1.0.4",
   "description": "Query a local model from your browser.",
   "permissions": [
     "storage"
