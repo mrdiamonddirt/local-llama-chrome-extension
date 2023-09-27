@@ -4,7 +4,6 @@
   "version": "1.0.4",
   "description": "Query a local model from your browser.",
   "permissions": [
-    "storage"
   ],
   "action": {
     "default_popup": "popup.html",
