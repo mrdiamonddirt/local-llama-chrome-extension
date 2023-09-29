@@ -24,9 +24,13 @@ document.addEventListener('DOMContentLoaded', function () {
   var code_response = null;
 
   var ip = '127.0.0.1';
-  var port = '8080';
+  var port = '8000';
   var url = 'http://' + ip + ':' + port + '/';
 
+    function set_value_of_ip_and_port() {
+        serverIP.value = ip;
+        serverPort.value = port;
+    }
     // get the current ip and port from the settings
     serverIP.addEventListener('change', function () {
         ip = serverIP.value;
@@ -160,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
           settingsWindow.style.display = 'none';
       } else {
           settingsWindow.style.display = 'block';
-          
+        set_value_of_ip_and_port();
         get_current_model();
 
         get_ggufs();
