@@ -150,7 +150,7 @@ model_path = load_selected_model()
 bot = LLMChatBot(model_path=model_path)
 
 
-@app.route('/set_selected_folder', methods=['POST'])
+@app.route('/set_selected_folder', methods=['POST', 'OPTIONS'])
 def set_selected_folder():
     global selected_folder
     try:
@@ -163,7 +163,7 @@ def set_selected_folder():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/get_selected_folder', methods=['GET'])
+@app.route('/get_selected_folder', methods=['GET', 'OPTIONS'])
 def get_selected_folder():
     global selected_folder
     try:
@@ -172,7 +172,7 @@ def get_selected_folder():
         print(f'Error: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
-@app.route('/get_current_model', methods=['GET'])
+@app.route('/get_current_model', methods=['GET', 'OPTIONS'])
 def get_current_model():
     try:
         return jsonify({'current_model': model_path})
@@ -180,7 +180,7 @@ def get_current_model():
         print(f'Error: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
-@app.route('/load_model', methods=['POST'])
+@app.route('/load_model', methods=['POST', 'OPTIONS'])
 def load_model():
     try:
         data = request.get_json()
@@ -195,7 +195,7 @@ def load_model():
         return jsonify({'error': str(e)}), 500
 
 # Route to get the list of .gguf files in the model directory
-@app.route('/get_gguf_files', methods=['GET'])
+@app.route('/get_gguf_files', methods=['GET', 'OPTIONS'])
 def get_gguf_files():
     try:
         gguf_files = []
@@ -210,7 +210,7 @@ def get_gguf_files():
         print(f'Error: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
-@app.route('/query', methods=['POST'])
+@app.route('/query', methods=['POST', 'OPTIONS'])
 def handle_query():
     try:
         data = request.get_json()
@@ -223,7 +223,7 @@ def handle_query():
         print(f'Error: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
-@app.route('/health', methods=['GET'])
+@app.route('/health', methods=['GET', 'OPTIONS'])
 def health_check():
     try:
         return jsonify({'status': 'healthy'})
@@ -235,4 +235,4 @@ def health_check():
 
 if __name__ == "__main__":
     print("API endpoint available.")
-    app.run(host='127.0.0.1', port=5000)
+    app.run(host='127.0.0.1', port=8000)

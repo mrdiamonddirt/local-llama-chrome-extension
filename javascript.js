@@ -15,22 +15,45 @@ document.addEventListener('DOMContentLoaded', function () {
   const settingsClose = document.getElementById('settingsClose');
   const modelSelect = document.getElementById('modelSelect');
   const changeModelButton = document.getElementById('changeModel');
+  const serverIP = document.getElementById('serverIP');
+  const serverPort = document.getElementById('serverPort');
 //   const serverStart = document.getElementById('serverStart');
 
   var creatorContentOpen = false;
   var helpContentOpen = false;
   var code_response = null;
 
+  var ip = '127.0.0.1';
+  var port = '8080';
+  var url = 'http://' + ip + ':' + port + '/';
+
+    // get the current ip and port from the settings
+    serverIP.addEventListener('change', function () {
+        ip = serverIP.value;
+        url = 'http://' + ip + ':' + port + '/';
+        console.log(url)
+    });
+
+    serverPort.addEventListener('change', function () {
+        port = serverPort.value;
+        url = 'http://' + ip + ':' + port + '/';
+        console.log(url)
+    });
+
+
   // if the settings are open get the current model selected in modelSelect and send it to the server to be loaded
     changeModelButton.addEventListener('click', function () {
         var model = modelSelect.options[modelSelect.selectedIndex].value;
         console.log(model);
-        fetch('http://127.0.0.1:5000/load_model', {
+        //load the model url
+        var req_url = 'http://' + ip + ':' + port + '/load_model';
+        fetch(req_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ model: model }),
+            mode: 'cors',
         })
         .then(response => response.json())
         .then(data => {
@@ -146,11 +169,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function get_current_model() {
      // get the current model from the server
-        fetch('http://127.0.0.1:5000/get_current_model', {
+     var req_url = 'http://' + ip + ':' + port + '/get_current_model';
+        fetch(req_url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
+            mode: 'cors',
         })
         .then(response => response.json())
         .then(data => {
@@ -171,11 +196,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function get_ggufs() {
         // get models from the server
-        fetch('http://127.0.0.1:5000/get_gguf_files', {
+        var req_url = 'http://' + ip + ':' + port + '/get_gguf_files';
+        fetch(req_url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
+            mode: 'cors',
         })
         .then(response => response.json())
         .then(data => {
@@ -215,11 +242,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // guery the server to check if it is running
     // if you get a response then turn the button green
     // if you don't get a response then turn the button red
-    fetch('http://127.0.0.1:5000/health', {
+    var req_url = 'http://' + ip + ':' + port + '/health';
+    fetch(req_url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
+        mode: 'cors',
         })
         .then(response => response.json())
         .then(data => {
@@ -246,7 +275,8 @@ document.addEventListener('DOMContentLoaded', function () {
     resultDiv.innerHTML += `<div class="loading">"Llama is thinking..."</div>`;
     resultDiv.scrollTop = resultDiv.scrollHeight;
 
-    fetch('http://127.0.0.1:5000/query', {
+    var req_url = 'http://' + ip + ':' + port + '/query';
+    fetch(req_url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
