@@ -1,1 +1,7 @@
 /localLlama/__pycache__
+/tests
+.pypirc
+/build
+/dist
+litellm_uuid.txt
+local_llama.egg-info
