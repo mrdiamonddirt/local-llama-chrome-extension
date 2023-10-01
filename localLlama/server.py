@@ -180,10 +180,11 @@ def get_current_model():
         print(f'Error: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
-@app.route('/load_model', methods=['POST', 'OPTIONS'])
+@app.route('/load_model', methods=['POST'])
 def load_model():
     try:
         data = request.get_json()
+        print(f'Loading model: {data}')
         model_path_file = os.path.dirname(model_path)
         print(f'Loading model: {model_path_file}')
         print(f'Loading model: {data}')
@@ -210,7 +211,7 @@ def get_gguf_files():
         print(f'Error: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
-@app.route('/query', methods=['POST', 'OPTIONS'])
+@app.route('/query', methods=['POST'])
 def handle_query():
     try:
         data = request.get_json()

@@ -55,9 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                
             },
-            body: JSON.stringify({ model: model }),
             mode: 'cors',
+            body: JSON.stringify({ model: model }),
         })
         .then(response => response.json())
         .then(data => {
@@ -286,6 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query: query }),
+      mode: 'cors',
     })
       .then(response => response.json())
       .then(data => {
