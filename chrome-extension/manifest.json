@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Local LLama LLM AI Chat Query Tool",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Query a local model from your browser.",
   "permissions": [
   ],
