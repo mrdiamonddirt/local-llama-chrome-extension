@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
             },
             mode: 'cors',
         })
@@ -206,6 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
             },
             mode: 'cors',
         })
@@ -252,6 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
         },
         mode: 'cors',
         })
@@ -285,6 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({ query: query }),
       mode: 'cors',

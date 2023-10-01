@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='local-llama',  # Change this to a suitable name for your script
+    name='local-llama',
     version='1.0.3',
     description='A flask server for a chrome extension that querys llm models',
     long_description='A flask server for a chrome extension that querys llm models for use with this chrome extention: https://chrome.google.com/webstore/detail/local-llama-llm-ai-chat-q/ekobbgdgkocdnnjoahoojakmoimfjlbm',
