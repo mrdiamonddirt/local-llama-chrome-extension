@@ -1,4 +1,5 @@
 /localLlama/__pycache__
+build_publish.txt
 /tests
 .pypirc
 /build
