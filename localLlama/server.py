@@ -2,6 +2,7 @@ import os
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import traceback
 
 from rich import print
 from llama_cpp import Llama
@@ -39,6 +40,11 @@ def make_prompt_llama2(llm, messages: List[Message]) -> List[int]:
             "content": B_SYS + messages[0]["content"] + E_SYS + messages[1]["content"],
         }
     ] + messages[2:]
+
+    # Print all messages
+    print("All Messages:")
+    for msg in messages:
+        print(f"Role: {msg['role']}, Content: {msg['content']}")
 
     assert all([msg["role"] == "user" for msg in messages[::2]]) and all(
         [msg["role"] == "assistant" for msg in messages[1::2]]
@@ -221,7 +227,8 @@ def handle_query():
         print(f'Sending response: {response}')
         return jsonify({'response': response})
     except Exception as e:
-        print(f'Error: {str(e)}')
+        # print(f'Error: {str(e)}')
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
 @app.route('/health', methods=['GET', 'OPTIONS'])

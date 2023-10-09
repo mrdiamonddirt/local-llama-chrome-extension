@@ -15,6 +15,7 @@ setup(
         'rich',
         'llama-cpp-python',
         'typing-extensions',
+        'typing',
     ],
     entry_points={
         'console_scripts': [

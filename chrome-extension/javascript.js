@@ -311,6 +311,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (code_response) {
             // remove the first <br> if it exists
             data.response = data.response.replace(/```<br>/g, '```');
+            // replace ```python with ```
+            data.response = data.response.replace(/```python/g, '```');
             data.response = data.response.replace(/```(.*?)```/g, '<div class="code"><pre>$1</pre><div id="copyCode">copy</div></div>');
         }
         resultDiv.innerHTML += `<div class="bot">Response: ${data.response}</div>`;	
@@ -320,8 +322,8 @@ document.addEventListener('DOMContentLoaded', function () {
         queryInput.value = '';
       })
       .catch(error => {
-        const loading = document.querySelector('.loading');
-        loading.parentNode.removeChild(loading);
+        // const loading = document.querySelector('.loading');
+        // loading.parentNode.removeChild(loading);
 
         resultDiv.innerHTML += `<div class="error">${error}, is the server up?</div>`;	 
         // console.error(error);

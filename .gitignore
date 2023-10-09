@@ -6,3 +6,4 @@ build_publish.txt
 /dist
 litellm_uuid.txt
 local_llama.egg-info
+chrome-extension-v*.zip
